@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     position:'',//位置地点
-    userInfo:null,//用户信息
+    userInfo:'',//用户信息
   },
   getters: {
   },

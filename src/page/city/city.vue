@@ -1,5 +1,5 @@
 <template>
-    <div></div>
+    <div>1111{{$route.query.city}}</div>
 </template>
 <script>
 </script>

@@ -8,3 +8,18 @@ export const guessCity=()=>{
     })
 }
 // 获取热门城市
+export const hotCities=()=>{
+    return axios.get('/v1/cities',{
+        params:{
+            type:'hot'
+        }
+    })
+}
+//获取所有城市
+export const cities=()=>{
+    return axios.get('/v1/cities',{
+        params:{
+            type:'group'
+        }
+    })
+}

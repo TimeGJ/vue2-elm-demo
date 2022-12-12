@@ -9,13 +9,20 @@ const routes = [
     name: 'home',
     component: ()=>import('../page/home/home.vue') 
   },
+  //city页面
   {
     path: '/city',
     name: 'city',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: ()=>{import ('../page/city/city')}
+    component: ()=>import ('../page/city/city')
+  },
+  //登录页面
+  {
+    path:'/login',
+    name:'login',
+    component:()=>import ('../page/login/login')
   }
 ]
 

@@ -5,7 +5,6 @@ import Axios from 'axios'
 })
 //请求拦截器
 axios.interceptors.request.use(function(config){
-    console.log('1')
     return config
 },function(error){
     return Promise.reject(error)
@@ -13,7 +12,6 @@ axios.interceptors.request.use(function(config){
 
 //请求响应
 axios.interceptors.response.use(function(response){
-    console.log(response.data)
     return response.data
 },function(error){
     return Promise.reject(error)
