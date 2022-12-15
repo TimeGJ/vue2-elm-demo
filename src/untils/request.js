@@ -14,6 +14,6 @@ axios.interceptors.request.use(function(config){
 axios.interceptors.response.use(function(response){
     return response.data
 },function(error){
-    return Promise.reject(error)
+    return Promise.reject('服务器请求错误'+error)
 })
 export default axios

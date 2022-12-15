@@ -23,3 +23,7 @@ export const cities=()=>{
         }
     })
 }
+//验证码图片
+export const  captCodeImg=()=>{
+    return axios.post('/v1/captchas')
+}

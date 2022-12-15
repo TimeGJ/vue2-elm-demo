@@ -70,7 +70,7 @@ export default{
             })
             //获取热门城市
             hotCities().then(res=>{
-                this.hotCity=res
+              this.hotCity=res
             })
             //获取所有城市
             cities().then(res=>{
