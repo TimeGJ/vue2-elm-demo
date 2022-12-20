@@ -27,3 +27,13 @@ export const cities=()=>{
 export const  captCodeImg=()=>{
     return axios.post('/v1/captchas')
 }
+//用户信息登录
+export const accountLogin=(phoneNum,password,codeNumber)=>{
+    return axios.post('/v2/login',{
+        data:{
+            username:phoneNum,
+            password:password,
+            captcha_code:codeNumber
+        }
+    })
+}

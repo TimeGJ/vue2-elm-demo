@@ -1,11 +1,7 @@
 <template>
     <div class="box">
-        <Header>
-            <div slot="back"  @click="$router.go(-1)">
-            <svg class="back">
-                <use xlink:href="#icon-arrow-left"></use>
-            </svg>
-            </div>
+        <Header leftBack="true">
+            
           <div slot="message">密码登录</div>
     </Header>
     <form>
@@ -21,7 +17,7 @@
     </section>
     <section>
         <input type="text" placeholder="验证码" v-model="codeNumber">
-        <img :src="codeImg" alt="" class="img">
+        <img :src="codeImg" alt="" class="img" v-show="codeImg">
         <p @touchstart="transImg">看不清？换一张</p>
     </section>
     </form>
@@ -35,7 +31,7 @@
 </template>
 <script>
 import Header from '../../components/head/header.vue'
-import {captCodeImg} from '../../untils/api'
+import {captCodeImg,accountLogin} from '../../untils/api'
 import alertTipVue from '@/components/alertTip/alertTip.vue'
 export default{
     name:'Login',
@@ -57,22 +53,22 @@ export default{
     computed:{
         //手机号验证
         rightPhoneNumber(){
-            return /^1\d{10}$/.test(this.username)
+            return /^1\d{10}$/.test(this.phoneNum)
         },
         rightCodeNumber(){
             return /^\d{4}$/.test(this.codeNumber)
         }
         },
-        methods:{
+    methods:{
         //是否显示密码
         showPwd(){
             this.showPassword=!this.showPassword
         },
         //换验证码
-        async transImg(){
-            await captCodeImg().then(res=>{
+        transImg(){
+           captCodeImg().then(res=>{
             this.codeImg=res.code
-        })
+           })
         },
         //登录
         submit(){
@@ -86,22 +82,24 @@ export default{
                 this.alertText = '请输入密码';
                 return 
             }
-            else if(this.rightPhoneNumber){
+            else if(!this.rightPhoneNumber){
                 this.showAlert = true;
                 this.alertText = '验证码格式不正确';
                 return 
             }
+           accountLogin(this.phoneNum,this.password,this.codeNumber).then(res=>{
+              console.log(res)
+            }).catch(err=>{
+                console.log(err)
+            })
         },
         //关闭登录窗口
         closeTip(){
             this.showAlert=false
         }
     },
-   
     created(){
-         captCodeImg().then(res=>{
-           this.codeImg=res.code
-        })
+      this.transImg()
     },
  
 }
@@ -109,13 +107,7 @@ export default{
 <style lang="less" scoped>
     .box{
         margin-top: 3rem;
-        Header{
-            
-        div{
-            font-size: 1rem;
-            font-weight: 700;
-        }
-     }
+
         section{
             display: flex;
             justify-content: space-between;

@@ -12,6 +12,7 @@ axios.interceptors.request.use(function(config){
 
 //请求响应
 axios.interceptors.response.use(function(response){
+    console.log(response)
     return response.data
 },function(error){
     return Promise.reject('服务器请求错误'+error)

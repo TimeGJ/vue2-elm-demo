@@ -2,8 +2,11 @@
     <header class="head">
         <div class="left">
             <slot name="logo"></slot>
-            <slot name="back">
-            </slot> 
+            <div v-if="leftBack" @click="$router.go(-1)">
+            <svg class="back">
+                <use xlink:href="#icon-arrow-left"></use>
+            </svg>
+            </div>
         </div>
         <div class="msg">
             <slot name="message"></slot>
@@ -21,7 +24,11 @@ export default{
 
         }
     },
-
+    props:{
+        leftBack:{
+            type:String
+        }
+    }
 }
 </script>
 <style lang="less">
