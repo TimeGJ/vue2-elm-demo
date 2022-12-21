@@ -55,7 +55,6 @@ export default{
         }
     }
     .msg{
-       
         display: inline-block;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -66,6 +65,9 @@ export default{
         margin-left: 2.5rem;
         width: 50%;
         color: #fff;
+        div{
+            color: #fff;
+        }
         }
     .login{
         float: right;
@@ -77,6 +79,9 @@ export default{
         a{
             color: #fff;
             text-decoration: none;
+        }
+        div{
+            color: #fff;
         }
     }
 }

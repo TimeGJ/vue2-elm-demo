@@ -1,8 +1,37 @@
 <template>
-   <Header leftBack="true"></Header>
+    <div>
+   <Header leftBack="true"><div slot="message">{{city}}</div>
+    <div slot="login" @touchend="$router.go(-1)">切换城市</div>
+   </Header>
+   <div class="box">
+    <form>
+   <div class="searchAddress">
+    <div>
+    <input type="text" placeholder="输入学校、商务楼、地址" v-model="keyword" >
+    </div>
+   <div>
+    <input type="submit" value="提交" class="btn" @touchend.prevent="search">
+   </div>
+</div>
+</form>
+<div class="searchHistory" v-if="!list">搜索历史</div>
+<div class="addressList">
+    <ul>
+        <li v-for="(item,index) in list" :key="index">
+            <h4>{{item.name}}</h4>
+            <p>{{item.address}}</p>
+        </li>
+    </ul>
+</div>
+<div v-if="list" class="noResult">
+    很抱歉!无搜索结果
+</div>
+</div>
+</div>
 </template>
 <script>
 import Header from '../../components/head/header'
+import {getCity,searchAddress} from '../../untils/api'
 export default {
     name:'City',
     components:{
@@ -10,10 +39,89 @@ export default {
     },
     data() {
         return {
-            
+            cityId:this.$route.query.city ,
+            city:'',
+            keyword:'',
+            list:null
         }
+    },
+    methods:{
+        initCity(){
+            getCity(this.cityId).then(res=>{
+            this.city=res.name
+            }).catch(error=>{
+            console.log(error)
+        })
+        } ,
+        search(){
+            searchAddress(this.cityId,this.keyword).then(res=>{
+                this.list=res
+            }).catch(error=>{
+                console.log(error)
+            })
+        }
+    },
+    created(){
+      this.initCity() 
     },
 }
 </script>
 <style lang="less">
+.box{
+    margin-top: 3rem;
+    .searchAddress{
+        padding: 1rem 1rem;
+        width: 100%;
+        height: 6rem;
+        background-color: #fff;
+        div:first-child{
+            input{
+            border: 0.1rem solid #e4e4e4;
+            height: 2rem;
+            width: 100%;
+            font-size: 0.7rem;
+            }    
+        }
+        .btn{
+           
+            font-size: 0.7rem;
+            margin-top: 0.5rem;
+            background-color: #3190e8;
+            color: white;
+            height: 2rem;
+            width: 100%;
+        }
+    }
+    .searchHistory{
+        padding-left: 1rem;
+        border-top: 0.1rem solid #e4e4e4;
+        border-bottom:0.1rem solid #e4e4e4;
+        font-size: 0.5rem;
+    }
+    .addressList{
+        ul{
+            background-color: white;
+            li{
+                padding: 0.2rem 1rem;
+                border-top: 0.1rem solid #e4e4e4;
+                h4{
+                    margin: 0.3rem 0.2rem;
+                    font-weight: 400;
+                    font-size: 0.7rem;
+                }
+                p{
+                    margin: 0.3rem 0.2rem;
+                    font-size: 0.3rem;
+                    color: #999;
+                }
+            }
+        }
+    }
+    .noResult{
+        border-top: 0.1rem solid #e4e4e4;
+        padding: 0.2rem 1rem;
+        background-color: #fff;
+        font-size: 0.8rem;
+    }
+}
 </style>

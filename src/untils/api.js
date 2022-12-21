@@ -37,3 +37,16 @@ export const accountLogin=(phoneNum,password,codeNumber)=>{
         }
     })
 }
+//获取城市地址
+export const getCity=(cityId)=>{
+    return axios.get('v1/cities/'+cityId)
+}
+//搜索地址
+export const searchAddress=(cityId,word)=>{
+    return axios.get('v1/pois',{
+        params:{
+            city_id:cityId,
+            keyword:word,
+        } 
+    })
+}

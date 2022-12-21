@@ -13,8 +13,8 @@
             <span>定位不准确时请在一下列表寻找</span>
         </div>
         <div class="guessCity">
-        <router-link tag="div" :to="{path:'/city',query:{city:guessPosition}}">
-            <span>{{guessPosition}}</span>
+        <router-link tag="div" :to="{path:'/city',query:{city:guessPosition.id}}">
+            <span>{{guessPosition.name}}</span>
             <svg class="icon">
                 <use xlink:href="#icon-arrow-right"></use>
             </svg>
@@ -25,7 +25,7 @@
                 <span>热门城市</span>
             </div>
            <ul >
-            <router-link tag="li" :to="{path:'/city',query:{city:item.name}}" v-for="item in hotCity" :key="item.id">{{item.name}}</router-link>
+            <router-link tag="li" :to="{path:'/city',query:{city:item.id}}" v-for="item in hotCity" :key="item.id">{{item.name}}</router-link>
            </ul>
         </div>
         <div class="cities">
@@ -35,7 +35,7 @@
                 <p v-if="index===0">(按照字母排序)</p>
                </div>
                 <ul>
-                <router-link tag="li" :to="{path:'/city',query:{city:city.name}}"  v-for="city in item" :key="city.id">
+                <router-link tag="li" :to="{path:'/city',query:{city:city.id}}"  v-for="city in item" :key="city.id">
                     {{city.name}}
                 </router-link>
                 </ul>
@@ -65,7 +65,7 @@ export default{
         created(){
             //获取当前城市
             guessCity().then(res=>{
-                this.guessPosition=res.name
+                this.guessPosition=res
                
             })
             //获取热门城市
