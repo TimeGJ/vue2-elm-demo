@@ -24,7 +24,7 @@
     <p>温馨提示：未注册过的账号，登录时将自动注册
     </p>
     <p>注册过的用户可凭账号密码登录</p>
-    <div class="submit" @touchstart="submit">提交</div>
+    <div class="submit" @touchstart="submit">登录</div>
     <router-link to="">忘记密码？</router-link>
     <alertTip v-show="showAlert" :tipText="alertText" @closeTip="closeTip">{{alertText}}</alertTip>
     </div>
@@ -72,6 +72,7 @@ export default{
         },
         //登录
         submit(){
+            this.transImg()
             if(!this.rightPhoneNumber){
                 this.showAlert = true;
                 this.alertText = '手机号码格式不正确';
@@ -88,7 +89,17 @@ export default{
                 return 
             }
            accountLogin(this.phoneNum,this.password,this.codeNumber).then(res=>{
-              console.log(res)
+            if(!res.user_id){
+                this.showAlert=true
+                this.alertText=res.message
+            }
+            else{
+                this.$store.state.userInfo=res.user_id
+                console.log(this.$store.state.userInfo)
+                localStorage.removeItem('user_id')
+                localStorage.setItem('user_id',res.user_id)
+                this.$router.push('/')
+            }
             }).catch(err=>{
                 console.log(err)
             })

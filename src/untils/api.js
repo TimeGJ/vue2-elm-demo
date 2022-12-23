@@ -29,12 +29,10 @@ export const  captCodeImg=()=>{
 }
 //用户信息登录
 export const accountLogin=(phoneNum,password,codeNumber)=>{
-    return axios.post('/v2/login',{
-        data:{
+    return axios.post('/v2/login',{  
             username:phoneNum,
             password:password,
             captcha_code:codeNumber
-        }
     })
 }
 //获取城市地址
@@ -49,4 +47,8 @@ export const searchAddress=(cityId,word)=>{
             keyword:word,
         } 
     })
+}
+//经纬度提供具体地址
+export const detailedAddress=(address)=>{
+    return axios.get('v2/pois/'+address)
 }

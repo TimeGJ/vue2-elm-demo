@@ -23,11 +23,17 @@ const routes = [
     path:'/login',
     name:'login',
     component:()=>import ('../page/login/login')
+  },
+  //商铺主页
+  {
+    path:'/msite',
+    name:'msite',
+    component:()=>import('../page/msite/msite')
   }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })

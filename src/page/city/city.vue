@@ -4,10 +4,10 @@
     <div slot="login" @touchend="$router.go(-1)">切换城市</div>
    </Header>
    <div class="box">
-    <form>
+    <form @submit.prevent>
    <div class="searchAddress">
     <div>
-    <input type="text" placeholder="输入学校、商务楼、地址" v-model="keyword" >
+    <input type="search" required placeholder="输入学校、商务楼、地址" v-model="keyword">
     </div>
    <div>
     <input type="submit" value="提交" class="btn" @touchend.prevent="search">
@@ -17,7 +17,7 @@
 <div class="searchHistory" v-if="!list">搜索历史</div>
 <div class="addressList">
     <ul>
-        <li v-for="(item,index) in list" :key="index">
+        <li v-for="(item,index) in list" :key="index" @touchend="nextPage(item.name,item.address,item.geohash)">
             <h4>{{item.name}}</h4>
             <p>{{item.address}}</p>
         </li>
@@ -39,13 +39,15 @@ export default {
     },
     data() {
         return {
-            cityId:this.$route.query.city ,
-            city:'',
-            keyword:'',
-            list:null
+            cityId:this.$route.query.city ,//城市id
+            city:'',//城市
+            keyword:'',//搜索关键字
+            list:null,//搜索地址列表
+            historyAddress:''//历史地址
         }
     },
     methods:{
+        //初始化城市
         initCity(){
             getCity(this.cityId).then(res=>{
             this.city=res.name
@@ -53,12 +55,19 @@ export default {
             console.log(error)
         })
         } ,
+        //搜索对应的地址列表
         search(){
             searchAddress(this.cityId,this.keyword).then(res=>{
                 this.list=res
             }).catch(error=>{
                 console.log(error)
             })
+        },
+        //路由跳转店铺页面
+        nextPage(name,address,geohash){
+            let data=JSON.stringify([{name:name,address:address,geohash:geohash}])
+            localStorage.setItem('placeHistory',data)
+            this.$router.push('/msite')
         }
     },
     created(){
