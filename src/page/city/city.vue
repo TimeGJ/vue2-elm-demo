@@ -14,7 +14,18 @@
    </div>
 </div>
 </form>
-<div class="searchHistory" v-if="!list">搜索历史</div>
+<div class="searchHistory" v-show="!list">搜索历史</div>
+<div class="addressList" v-show="!list">
+    <ul>
+        <li v-for="(item,index) in historyAddress" :key="index" @touchend="nextPage(item.name,item.address,item.geohash)">
+            <h4>{{item.name}}</h4>
+            <p>{{item.address}}</p>
+        </li>
+    </ul>
+    <div @touchstart="clearHistory" class="clear" v-show="historyAddress">
+        清空所有
+    </div>
+</div>
 <div class="addressList">
     <ul>
         <li v-for="(item,index) in list" :key="index" @touchend="nextPage(item.name,item.address,item.geohash)">
@@ -23,7 +34,7 @@
         </li>
     </ul>
 </div>
-<div v-if="list" class="noResult">
+<div v-show="tipSearch" class="noResult">
     很抱歉!无搜索结果
 </div>
 </div>
@@ -43,7 +54,8 @@ export default {
             city:'',//城市
             keyword:'',//搜索关键字
             list:null,//搜索地址列表
-            historyAddress:''//历史地址
+            historyAddress:'',//历史地址
+            tipSearch:false,//无搜索提示
         }
     },
     methods:{
@@ -58,20 +70,44 @@ export default {
         //搜索对应的地址列表
         search(){
             searchAddress(this.cityId,this.keyword).then(res=>{
-                this.list=res
+                if(res.length==0){
+                    this.tipSearch=true
+                }
+                else{
+                    this.tipSearch=false
+                    this.list=res
+                }
+                
             }).catch(error=>{
                 console.log(error)
             })
         },
         //路由跳转店铺页面
         nextPage(name,address,geohash){
-            let data=JSON.stringify([{name:name,address:address,geohash:geohash}])
-            localStorage.setItem('placeHistory',data)
+            let data=[{name:name,address:address,geohash:geohash}]
+            if(localStorage.getItem('placeHistory')){
+                data=JSON.parse(localStorage.getItem('placeHistory'))
+                data.push({name:name,address:address,geohash:geohash})
+            }
+            localStorage.setItem('placeHistory',JSON.stringify(data))
             this.$router.push('/msite')
+        },
+        //初始化历史地址
+        initHistory(){
+            if(localStorage.getItem('placeHistory')){ 
+                this.historyAddress=JSON.parse(localStorage.getItem('placeHistory')) 
+            }
+            return
+        },
+        //清空历史记录
+        clearHistory(){
+            localStorage.removeItem('placeHistory')
+            this.historyAddress=''
         }
     },
     created(){
-      this.initCity() 
+      this.initCity()
+      this.initHistory()
     },
 }
 </script>
@@ -131,6 +167,14 @@ export default {
         padding: 0.2rem 1rem;
         background-color: #fff;
         font-size: 0.8rem;
+    }
+    .clear{
+        border-top: 0.1rem solid #e4e4e4;
+        text-align: center;
+        width: 100%;
+        height: 2rem;
+        background-color: white;
+        font-size: 1rem;
     }
 }
 </style>

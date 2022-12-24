@@ -80,7 +80,7 @@ export default{
             color: #fff;
             text-decoration: none;
         }
-        div{
+        span,div{
             color: #fff;
         }
     }

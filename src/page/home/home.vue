@@ -3,7 +3,6 @@
         <div>
             <Header>
                 <div slot="logo">elm</div>
-                <div slot="message">{{$store.state.position}}</div>
                  <router-link :to="{name:'login'}" slot="login"><span>登录|注册</span></router-link>
             </Header>
         </div>

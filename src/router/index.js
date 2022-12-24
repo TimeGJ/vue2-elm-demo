@@ -29,6 +29,30 @@ const routes = [
     path:'/msite',
     name:'msite',
     component:()=>import('../page/msite/msite')
+  },
+  //商铺搜索页
+  {
+    path:'/search',
+    name:'search',
+    component:()=>import('../page/search/search')
+  },
+  //订单页
+  {
+    path:'/order',
+    name:'order',
+    component:()=>import('../page/order/order')
+  },
+  //用户主页
+  {
+    path:'profile',
+    name:'profile',
+    component:()=>import('../page/profile/profile')
+  },
+  //食物页面
+  {
+    path:'food',
+    name:'food',
+    component:()=>import('../page/food/food')
   }
 ]
 
