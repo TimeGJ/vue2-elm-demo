@@ -48,7 +48,20 @@ export const searchAddress=(cityId,word)=>{
         } 
     })
 }
+//食品分类列表
+export const getFoodList=()=>{
+    return axios.get('v2/index_entry')
+}
 //经纬度提供具体地址
 export const detailedAddress=(address)=>{
     return axios.get('v2/pois/'+address)
+}
+//商铺列表
+export const getShoppingList=(latitude,longitude)=>{
+    return axios.get('shopping/restaurants',{
+        params:{
+        latitude:latitude,
+        longitude:longitude
+        }
+    })
 }

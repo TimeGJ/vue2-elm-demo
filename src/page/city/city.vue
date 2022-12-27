@@ -73,6 +73,9 @@ export default {
                 if(res.length==0){
                     this.tipSearch=true
                 }
+                else if(res.message){
+                    this.tipSearch=true
+                }
                 else{
                     this.tipSearch=false
                     this.list=res
@@ -82,12 +85,27 @@ export default {
                 console.log(error)
             })
         },
-        //路由跳转店铺页面
+        //路由跳转店铺页面并添加地址到localStorage
         nextPage(name,address,geohash){
+            let statue=false
             let data=[{name:name,address:address,geohash:geohash}]
             if(localStorage.getItem('placeHistory')){
                 data=JSON.parse(localStorage.getItem('placeHistory'))
-                data.push({name:name,address:address,geohash:geohash})
+                data.forEach(item => {
+                      if(item.name== name){
+                        statue=true
+                        return
+                      }
+                });
+                if(statue){
+                    this.$router.push('/msite')
+                }
+                else{
+                    data.push({name:name,address:address,geohash:geohash})
+                    localStorage.setItem('placeHistory',JSON.stringify(data))
+                    this.$router.push('/msite')
+                }
+                
             }
             localStorage.setItem('placeHistory',JSON.stringify(data))
             this.$router.push('/msite')
@@ -111,7 +129,7 @@ export default {
     },
 }
 </script>
-<style lang="less">
+<style lang="less" scoped>
 .box{
     margin-top: 3rem;
     .searchAddress{

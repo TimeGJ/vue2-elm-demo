@@ -32,7 +32,8 @@ export default{
 }
 </script>
 <style lang="less">
-.head{  
+.head{ 
+        z-index: 1;
         position: fixed;
         top: 0;
         left: 0;

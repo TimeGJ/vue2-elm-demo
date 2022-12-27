@@ -40,7 +40,7 @@ export default{
     props:{
         userName:{
             String,
-            require,
+            // required,
         }
     },
     data(){

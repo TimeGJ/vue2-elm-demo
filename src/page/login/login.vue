@@ -1,7 +1,6 @@
 <template>
     <div class="box">
-        <Header leftBack="true">
-            
+    <Header leftBack="true"> 
           <div slot="message">密码登录</div>
     </Header>
     <form>
@@ -32,7 +31,7 @@
 <script>
 import Header from '../../components/head/header.vue'
 import {captCodeImg,accountLogin} from '../../untils/api'
-import alertTipVue from '@/components/alertTip/alertTip.vue'
+import alertTipVue from '@/components/alertTip.vue'
 export default{
     name:'Login',
     components:{
@@ -118,7 +117,6 @@ export default{
 <style lang="less" scoped>
     .box{
         margin-top: 3rem;
-
         section{
             display: flex;
             justify-content: space-between;
