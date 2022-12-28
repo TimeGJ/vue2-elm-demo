@@ -28,25 +28,37 @@ const routes = [
   {
     path:'/msite',
     name:'msite',
-    component:()=>import('../page/msite/msite')
+    component:()=>import('../page/msite/msite'),
+    meta:{
+      keepalive:true
+    }
   },
   //商铺搜索页
   {
     path:'/search',
     name:'search',
-    component:()=>import('../page/search/search')
+    component:()=>import('../page/search/search'),
+    meta:{
+      keepalive:true
+    }
   },
   //订单页
   {
     path:'/order',
     name:'order',
-    component:()=>import('../page/order/order')
+    component:()=>import('../page/order/order'),
+    meta:{
+      keepalive:true
+    }
   },
   //用户主页
   {
     path:'profile',
     name:'profile',
-    component:()=>import('../page/profile/profile')
+    component:()=>import('../page/profile/profile'),
+    meta:{
+      keepalive:true
+    }
   },
   //食物页面
   {

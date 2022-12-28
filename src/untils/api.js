@@ -60,8 +60,17 @@ export const detailedAddress=(address)=>{
 export const getShoppingList=(latitude,longitude)=>{
     return axios.get('shopping/restaurants',{
         params:{
-        latitude:latitude,
-        longitude:longitude
+        latitude,
+        longitude
+        }
+    })
+}
+//搜索商铺
+export const searchRest=(geohash,keyword)=>{
+    return axios.get('v4/restaurants',{
+        params:{
+            geohash,
+            keyword
         }
     })
 }

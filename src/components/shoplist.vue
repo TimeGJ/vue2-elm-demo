@@ -41,18 +41,24 @@
 </template>
 <script>
 import Star from './star'
-import {getShoppingList} from '../untils/api'
+import {getShoppingList,searchRest} from '../untils/api'
 export default{
     name:'shoplist',
     components:{
         Star
     },  
     props:{
-        hashLatitude:{
-            required:true
+        hash:{//经纬度
+
         },
-        hashLongitude:{
-            required:true
+        hashLatitude:{//经度
+            
+        },
+        hashLongitude:{//纬度
+            
+        },
+        keyword:{//搜索关键字
+
         }
     },
     data(){
@@ -62,18 +68,35 @@ export default{
         }   
     },
     methods:{
+        //获取商店列表数据
         shopList(hashLatitude,hashLongitude){
             getShoppingList(hashLatitude,hashLongitude).then(res=>{
                 this.shoppingList=res
+            }).catch(error=>{
+                console.log(error)
+            })
+        },
+        //搜索商店列表
+        searchList(geohash,keyword){
+            searchRest(geohash,keyword).then(res=>{
+                this.shoppingList=res
+            }).catch(error=>{
+                console.log(error)
             })
         }
     },
     watch:{
+        //当获取到经纬度时，获取商店列表数据
         hashLatitude:{
             handler(val,old){
                 this.shopList(val,this.hashLongitude)
             }
-            ,immediate:true
+            // ,immediate:true
+        },
+        keyword:{
+            handler(val,old){
+                this.searchList(this.hash,val)
+            }
         }
     },
     created(){
