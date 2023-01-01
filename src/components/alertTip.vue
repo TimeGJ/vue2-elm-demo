@@ -13,6 +13,7 @@
     </div>
 </template>
 <script>
+
 export default{
     name:'Alert-Tip',
     data(){
@@ -21,7 +22,9 @@ export default{
         }
     },
     props:{
-        tipText:String
+        tipText:{
+            String,
+        },
     },
     methods:{
         closeTip(){

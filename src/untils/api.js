@@ -1,7 +1,7 @@
 import axios from './request'
 //获取当前城市
 export const guessCity=()=>{
-    return axios.get('/v1/cities',{
+    return axios.get('v1/cities',{
         params:{
             type:'guess'
         }
@@ -29,11 +29,12 @@ export const  captCodeImg=()=>{
 }
 //用户信息登录
 export const accountLogin=(data)=>{
-    return axios.post('/v2/login',data,{
-        headers:{
-            'Content-Type':'application/x-www-form-urlencoded'
-        }
-    })
+    return axios.post('v2/login',data
+)
+}
+//修改密码
+export const changePwd=(data)=>{
+    return axios.post('v2/changepassword',data)
 }
 //获取城市地址
 export const getCity=(cityId)=>{

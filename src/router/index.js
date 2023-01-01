@@ -24,6 +24,12 @@ const routes = [
     name:'login',
     component:()=>import ('../page/login/login')
   },
+  //重置密码
+  {
+    path:'/forget',
+    name:'forget',
+    component:()=>import ('../page/login/forget')
+  },
   //商铺主页
   {
     path:'/msite',

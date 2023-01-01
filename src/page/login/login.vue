@@ -24,7 +24,7 @@
     </p>
     <p>注册过的用户可凭账号密码登录</p>
     <div class="submit" @touchstart="submit">登录</div>
-    <router-link to="">忘记密码？</router-link>
+    <router-link to="/forget">重置密码？</router-link>
     <alertTip v-show="showAlert" :tipText="alertText" @closeTip="closeTip">{{alertText}}</alertTip>
     </div>
 </template>
@@ -89,9 +89,9 @@ export default{
                 return 
             }
             let data={username:this.phoneNum,password:this.password,captcha_code:this.codeNumber}
-            console.log(data)
-            console.log(qs.stringify(data))
+            // console.log(data)
             data=qs.stringify(data)
+     
            accountLogin(data).then(res=>{
             if(!res.user_id){
                 this.showAlert=true

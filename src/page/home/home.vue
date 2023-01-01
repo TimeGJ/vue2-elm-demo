@@ -3,7 +3,12 @@
         <div>
             <Header>
                 <div slot="logo">elm</div>
-                 <router-link :to="{name:'login'}" slot="login"><span>登录|注册</span></router-link>
+                 <router-link :to="{name:'login'}" slot="login" v-if="!userInfo"><span>登录|注册</span></router-link>
+                 <router-link to="/profile" slot="login" v-else>
+                    <svg class="user">
+                        <use xlink:href="#icon-user"></use>
+                    </svg>
+                 </router-link>
             </Header>
         </div>
         <div class="body">
@@ -55,7 +60,8 @@ export default{
                 //热门城市
                 hotCity:'',
                 //所有城市
-                allCities:''
+                allCities:'',
+                userInfo:null//用户信息
             }
         },
         components:{
@@ -75,6 +81,9 @@ export default{
             cities().then(res=>{
                 this.allCities=res
             })
+            //获取userInfo
+            this.$store.commit('getUserInfo')
+            this.userInfo=this.$store.state.userInfo
         },
         computed:{
             //将数据按字母排序
@@ -201,5 +210,12 @@ export default{
             }
         }
     }
+
+    }
+    .user{
+        width: 1.2rem;
+        height: 1.2rem;
+        fill: #fff;
+        vertical-align: middle;
     }
 </style>
