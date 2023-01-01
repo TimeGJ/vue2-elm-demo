@@ -29,6 +29,7 @@
     </div>
 </template>
 <script>
+import qs from "qs"
 import Header from '../../components/head/header.vue'
 import {captCodeImg,accountLogin} from '../../untils/api'
 import alertTipVue from '@/components/alertTip.vue'
@@ -87,7 +88,11 @@ export default{
                 this.alertText = '验证码格式不正确';
                 return 
             }
-           accountLogin(this.phoneNum,this.password,this.codeNumber).then(res=>{
+            let data={username:this.phoneNum,password:this.password,captcha_code:this.codeNumber}
+            console.log(data)
+            console.log(qs.stringify(data))
+            data=qs.stringify(data)
+           accountLogin(data).then(res=>{
             if(!res.user_id){
                 this.showAlert=true
                 this.alertText=res.message
@@ -110,6 +115,7 @@ export default{
     },
     created(){
       this.transImg()
+      
     },
  
 }

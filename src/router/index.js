@@ -53,7 +53,7 @@ const routes = [
   },
   //用户主页
   {
-    path:'profile',
+    path:'/profile',
     name:'profile',
     component:()=>import('../page/profile/profile'),
     meta:{
@@ -62,10 +62,10 @@ const routes = [
   },
   //食物页面
   {
-    path:'food',
+    path:'/food',
     name:'food',
     component:()=>import('../page/food/food')
-  }
+  },
 ]
 
 const router = new VueRouter({

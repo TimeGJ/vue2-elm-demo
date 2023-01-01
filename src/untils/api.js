@@ -28,11 +28,11 @@ export const  captCodeImg=()=>{
     return axios.post('/v1/captchas')
 }
 //用户信息登录
-export const accountLogin=(phoneNum,password,codeNumber)=>{
-    return axios.post('/v2/login',{  
-            username:phoneNum,
-            password:password,
-            captcha_code:codeNumber
+export const accountLogin=(data)=>{
+    return axios.post('/v2/login',data,{
+        headers:{
+            'Content-Type':'application/x-www-form-urlencoded'
+        }
     })
 }
 //获取城市地址
@@ -57,11 +57,18 @@ export const detailedAddress=(address)=>{
     return axios.get('v2/pois/'+address)
 }
 //商铺列表
-export const getShoppingList=(latitude,longitude)=>{
+export const getShoppingList=(latitude,longitude,offset,limit,restaurant_category_id,order_by,delivery_mode,support_ids,restaurant_category_ids)=>{
     return axios.get('shopping/restaurants',{
         params:{
         latitude,
-        longitude
+        longitude,
+        offset,//跳过多少条数据
+        limit,//请求数据的数量
+        restaurant_category_id,//餐馆的id
+        order_by,//排序方式id
+        delivery_mode,//配送方式id
+        support_ids,//餐馆支持特权的id
+        restaurant_category_ids//餐馆的分类id
         }
     })
 }
@@ -72,5 +79,14 @@ export const searchRest=(geohash,keyword)=>{
             geohash,
             keyword
         }
+    })
+}
+//商铺分类列表
+export const getCategory=(latitude,longitude)=>{
+    return axios.get('shopping/v2/restaurant/category',{
+       params:{
+        latitude,
+        longitude
+       }
     })
 }
