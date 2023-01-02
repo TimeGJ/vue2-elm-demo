@@ -99,11 +99,13 @@ export default {
                 });
                 if(statue){
                     this.$router.push('/msite')
+                    return
                 }
                 else{
                     data.push({name:name,address:address,geohash:geohash})
                     localStorage.setItem('placeHistory',JSON.stringify(data))
                     this.$router.push('/msite')
+                    return
                 }
                 
             }

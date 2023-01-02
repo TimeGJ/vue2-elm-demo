@@ -14,7 +14,7 @@
         <div class="banner" ref="swiperBox" @touchmove="swiper" @touchstart="initX" @touchend="swiperEnd">
             <div v-for="(arr,index) in foodList " :key="index" class="swiperList" >
             <ul>
-                <router-link :to="{path:'/food',query:{title:item.title}}" v-for="item in arr" :key="item.id">
+                <router-link :to="{path:'/food',query:{title:item.title,id:item.id}}" v-for="item in arr" :key="item.id">
                     <li><img :src='imgBaseurl+item.image_url' alt="">
                     <span>{{item.title}}</span></li>
                 </router-link>

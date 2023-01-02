@@ -52,12 +52,31 @@ export default{
 
         },
         hashLatitude:{//经度
-            
         },
         hashLongitude:{//纬度
-            
         },
         keyword:{//搜索关键字
+
+        },
+        offset:{//跳过几条数据
+           default:0
+        },
+        limit:{//请求几条数据
+            default:20
+        },
+        categoryId:{//请求餐馆id
+
+        },
+        categoryIds:{//请求餐馆的分类ids
+
+        },
+        order_by:{//排序方式
+
+        },
+        delivery_mode:{//配送方式
+
+        },
+        support_ids:{//餐馆支持特权的id
 
         }
     },
@@ -69,8 +88,8 @@ export default{
     },
     methods:{
         //获取商店列表数据
-        shopList(hashLatitude,hashLongitude){
-            getShoppingList(hashLatitude,hashLongitude).then(res=>{
+        shopList(){
+            getShoppingList(this.hashLatitude,this.hashLongitude,this.offset,this.limit,this.categoryId,this.order_by,this.delivery_mode,this.support_ids,this.categoryIds).then(res=>{
                 this.shoppingList=res
             }).catch(error=>{
                 console.log(error)
@@ -83,33 +102,42 @@ export default{
             }).catch(error=>{
                 console.log(error)
             })
-        }
+        },
     },
     watch:{
         //当获取到经纬度时，获取商店列表数据
         hashLatitude:{
             handler(val,old){
-                this.shopList(val,this.hashLongitude)
+                console.log('1')
+                this.shopList()
             }
-            // ,immediate:true
+            ,immediate:true
         },
+        //当分类id变化时请求数据
+        categoryIds:{
+            handler(val,old){
+                console.log('id'+val)
+                this.shopList()
+            }
+        },
+        //搜索关键字时调用
         keyword:{
             handler(val,old){
                 this.searchList(this.hash,val)
             }
-        }
+        },
     },
     created(){
-       
-    }
+    }   
 }
 </script>
 <style lang="less" scoped>
 .box{
+    background-color: #fff;
     .shopping-box{
         display: flex;
         justify-content: space-between;
-        margin: 1rem 0.5rem;
+        padding: 1rem 0.5rem;
         .left{
             display: flex;
             justify-content: space-between;
