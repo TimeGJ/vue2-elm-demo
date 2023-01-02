@@ -1,11 +1,6 @@
 <template>
     <div class="box">
-        <Header>
-            <div slot="back"  @click="$router.go(-1)">
-            <svg class="back">
-                <use xlink:href="#icon-arrow-left"></use>
-            </svg>
-            </div>
+    <Header leftBack="true"> 
           <div slot="message">密码登录</div>
     </Header>
     <form>
@@ -21,22 +16,23 @@
     </section>
     <section>
         <input type="text" placeholder="验证码" v-model="codeNumber">
-        <img :src="codeImg" alt="" class="img">
+        <img :src="codeImg" alt="" class="img" v-show="codeImg">
         <p @touchstart="transImg">看不清？换一张</p>
     </section>
     </form>
     <p>温馨提示：未注册过的账号，登录时将自动注册
     </p>
     <p>注册过的用户可凭账号密码登录</p>
-    <div class="submit" @touchstart="submit">提交</div>
-    <router-link to="">忘记密码？</router-link>
+    <div class="submit" @touchstart="submit">登录</div>
+    <router-link to="/forget">重置密码？</router-link>
     <alertTip v-show="showAlert" :tipText="alertText" @closeTip="closeTip">{{alertText}}</alertTip>
     </div>
 </template>
 <script>
+import qs from "qs"
 import Header from '../../components/head/header.vue'
-import {captCodeImg} from '../../untils/api'
-import alertTipVue from '@/components/alertTip/alertTip.vue'
+import {captCodeImg,accountLogin} from '../../untils/api'
+import alertTipVue from '@/components/alertTip.vue'
 export default{
     name:'Login',
     components:{
@@ -57,25 +53,26 @@ export default{
     computed:{
         //手机号验证
         rightPhoneNumber(){
-            return /^1\d{10}$/.test(this.username)
+            return /^1\d{10}$/.test(this.phoneNum)
         },
         rightCodeNumber(){
             return /^\d{4}$/.test(this.codeNumber)
         }
         },
-        methods:{
+    methods:{
         //是否显示密码
         showPwd(){
             this.showPassword=!this.showPassword
         },
         //换验证码
-        async transImg(){
-            await captCodeImg().then(res=>{
+        transImg(){
+           captCodeImg().then(res=>{
             this.codeImg=res.code
-        })
+           })
         },
         //登录
         submit(){
+            this.transImg()
             if(!this.rightPhoneNumber){
                 this.showAlert = true;
                 this.alertText = '手机号码格式不正确';
@@ -86,22 +83,39 @@ export default{
                 this.alertText = '请输入密码';
                 return 
             }
-            else if(this.rightPhoneNumber){
+            else if(!this.rightPhoneNumber){
                 this.showAlert = true;
                 this.alertText = '验证码格式不正确';
                 return 
             }
+            let data={username:this.phoneNum,password:this.password,captcha_code:this.codeNumber}
+            // console.log(data)
+            data=qs.stringify(data)
+     
+           accountLogin(data).then(res=>{
+            if(!res.user_id){
+                this.showAlert=true
+                this.alertText=res.message
+            }
+            else{
+                this.$store.state.userInfo=res.user_id
+                console.log(this.$store.state.userInfo)
+                localStorage.removeItem('user_id')
+                localStorage.setItem('user_id',res.user_id)
+                this.$router.push('/')
+            }
+            }).catch(err=>{
+                console.log(err)
+            })
         },
         //关闭登录窗口
         closeTip(){
             this.showAlert=false
         }
     },
-   
     created(){
-         captCodeImg().then(res=>{
-           this.codeImg=res.code
-        })
+      this.transImg()
+      
     },
  
 }
@@ -109,13 +123,6 @@ export default{
 <style lang="less" scoped>
     .box{
         margin-top: 3rem;
-        Header{
-            
-        div{
-            font-size: 1rem;
-            font-weight: 700;
-        }
-     }
         section{
             display: flex;
             justify-content: space-between;

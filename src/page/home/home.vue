@@ -3,8 +3,12 @@
         <div>
             <Header>
                 <div slot="logo">elm</div>
-                <div slot="message">{{$store.state.position}}</div>
-                 <router-link :to="{name:'login'}" slot="login"><span>登录|注册</span></router-link>
+                 <router-link :to="{name:'login'}" slot="login" v-if="!userInfo"><span>登录|注册</span></router-link>
+                 <router-link to="/profile" slot="login" v-else>
+                    <svg class="user">
+                        <use xlink:href="#icon-user"></use>
+                    </svg>
+                 </router-link>
             </Header>
         </div>
         <div class="body">
@@ -13,8 +17,8 @@
             <span>定位不准确时请在一下列表寻找</span>
         </div>
         <div class="guessCity">
-        <router-link tag="div" :to="{path:'/city',query:{city:guessPosition}}">
-            <span>{{guessPosition}}</span>
+        <router-link tag="div" :to="{path:'/city',query:{city:guessPosition.id}}">
+            <span>{{guessPosition.name}}</span>
             <svg class="icon">
                 <use xlink:href="#icon-arrow-right"></use>
             </svg>
@@ -25,7 +29,7 @@
                 <span>热门城市</span>
             </div>
            <ul >
-            <router-link tag="li" :to="{path:'/city',query:{city:item.name}}" v-for="item in hotCity" :key="item.id">{{item.name}}</router-link>
+            <router-link tag="li" :to="{path:'/city',query:{city:item.id}}" v-for="item in hotCity" :key="item.id">{{item.name}}</router-link>
            </ul>
         </div>
         <div class="cities">
@@ -35,7 +39,7 @@
                 <p v-if="index===0">(按照字母排序)</p>
                </div>
                 <ul>
-                <router-link tag="li" :to="{path:'/city',query:{city:city.name}}"  v-for="city in item" :key="city.id">
+                <router-link tag="li" :to="{path:'/city',query:{city:city.id}}"  v-for="city in item" :key="city.id">
                     {{city.name}}
                 </router-link>
                 </ul>
@@ -56,7 +60,8 @@ export default{
                 //热门城市
                 hotCity:'',
                 //所有城市
-                allCities:''
+                allCities:'',
+                userInfo:null//用户信息
             }
         },
         components:{
@@ -65,7 +70,7 @@ export default{
         created(){
             //获取当前城市
             guessCity().then(res=>{
-                this.guessPosition=res.name
+                this.guessPosition=res
                
             })
             //获取热门城市
@@ -76,6 +81,9 @@ export default{
             cities().then(res=>{
                 this.allCities=res
             })
+            //获取userInfo
+            this.$store.commit('getUserInfo')
+            this.userInfo=this.$store.state.userInfo
         },
         computed:{
             //将数据按字母排序
@@ -202,5 +210,12 @@ export default{
             }
         }
     }
+
+    }
+    .user{
+        width: 1.2rem;
+        height: 1.2rem;
+        fill: #fff;
+        vertical-align: middle;
     }
 </style>

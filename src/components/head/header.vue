@@ -2,8 +2,11 @@
     <header class="head">
         <div class="left">
             <slot name="logo"></slot>
-            <slot name="back">
-            </slot> 
+            <div v-if="leftBack" @click="$router.go(-1)">
+            <svg class="back">
+                <use xlink:href="#icon-arrow-left"></use>
+            </svg>
+            </div>
         </div>
         <div class="msg">
             <slot name="message"></slot>
@@ -21,11 +24,16 @@ export default{
 
         }
     },
-
+    props:{
+        leftBack:{
+            type:String
+        }
+    }
 }
 </script>
 <style lang="less">
-.head{  
+.head{ 
+        z-index: 5;
         position: fixed;
         top: 0;
         left: 0;
@@ -48,7 +56,6 @@ export default{
         }
     }
     .msg{
-       
         display: inline-block;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -59,6 +66,9 @@ export default{
         margin-left: 2.5rem;
         width: 50%;
         color: #fff;
+        div{
+            color: #fff;
+        }
         }
     .login{
         float: right;
@@ -70,6 +80,9 @@ export default{
         a{
             color: #fff;
             text-decoration: none;
+        }
+        span,div{
+            color: #fff;
         }
     }
 }
