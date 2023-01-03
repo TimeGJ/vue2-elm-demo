@@ -91,3 +91,7 @@ export const getCategory=(latitude,longitude)=>{
        }
     })
 }
+//获取用户信息
+export const getUserInfo=()=>{
+    return axios.get('v1/user')
+}
