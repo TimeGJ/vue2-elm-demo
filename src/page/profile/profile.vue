@@ -4,13 +4,13 @@
             <div slot="message">我的</div>
         </Header>
         <section class="user_info">
-            <router-link to="">
+            <router-link :to="userInfo&&userInfo.user_id?'/profile/info' : '/login'">
                 <div class="user_info_box">
                     <div class="user_icon_box">
-                        <svg class="user_icon">
+                        <svg class="user_icon" v-if="!showimg">
                             <use xlink:href="#icon-user-filling"></use>
                         </svg>
-                        <img src="" alt="" v-show="userInfo">
+                        <img :src="imgBaseurl+userInfo.avatar" alt="" v-else-if="showimg" class="img_bd">
                         <div class="user_num_box">
                             <h4>{{userInfo?userInfo.username:'登录/注册'}}</h4>
                             <svg>
@@ -109,6 +109,7 @@
             </ul>
         </section>
         <Foot userName="profile"></Foot>
+        <router-view></router-view>
     </div>
 </template>
 <script>
@@ -121,6 +122,8 @@ export default {
         return {
             userInfo:null,//用户信息
             phone:'暂无绑定手机号',//电话
+            imgBaseurl:'//elm.cangdu.org/img/',//图片地址
+            showimg:false,//是否显示图片
         }
     },
     components:{
@@ -131,18 +134,22 @@ export default {
         //获取用户信息
         initUserInfo(){
             getUserInfo().then(res=>{
-                this.userInfo=res
-                //判断有没有电话
-                if(this.userInfo.brand_member_new!=0){
-                    this.phone=this.userInfo.brand_member_new
+                if(res.status!=0){
+                    this.userInfo=res
+                    this.showimg=true
+                    //判断有没有电话
+                    if(this.userInfo.brand_member_new!=0){
+                        this.phone=this.userInfo.brand_member_new
+                    }
                 }
+              return
             })
         }
     },
     created(){
         this.initUserInfo()
       
-    }
+    },
 }
 </script>
 <style lang="less" scoped>
@@ -260,4 +267,10 @@ export default {
         .bd_b{
             border-bottom: 0.01rem solid #e4e4e4;
         }
+        .img_bd{
+            border-radius: 100%;
+            width: 3.5rem;
+            height: 3.5rem;
+        }
+
 </style>

@@ -95,3 +95,7 @@ export const getCategory=(latitude,longitude)=>{
 export const getUserInfo=()=>{
     return axios.get('v1/user')
 }
+//退出登录
+export const signOut=()=>{
+    axios.get('v2/signout')
+}

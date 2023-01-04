@@ -64,7 +64,11 @@ const routes = [
     component:()=>import('../page/profile/profile'),
     meta:{
       keepalive:true
-    }
+    },
+    children:[{
+      path:'info',//个人信息页
+      component:()=>import ('../page/profile/children/info')
+    }]
   },
   //食物页面
   {

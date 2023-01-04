@@ -108,7 +108,6 @@ export default{
         //当获取到经纬度时，获取商店列表数据
         hashLatitude:{
             handler(val,old){
-                console.log('1')
                 this.shopList()
             }
             ,immediate:true
@@ -116,7 +115,6 @@ export default{
         //当分类id变化时请求数据
         categoryIds:{
             handler(val,old){
-                console.log('id'+val)
                 this.shopList()
             }
         },
