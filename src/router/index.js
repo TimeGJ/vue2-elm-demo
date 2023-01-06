@@ -76,6 +76,18 @@ const routes = [
     name:'food',
     component:()=>import('../page/food/food')
   },
+  //会员中心
+  {
+    path:'/vipcard',
+    name:'vipcard',
+    component:()=>import ('../page/vipcard/vipcard'),
+    children:[{
+      //vip说明页面
+      path:'vipDescription',
+      component:()=>import ('../page/vipcard/children/vipDescription')
+    }]
+  },
+  
 ]
 
 const router = new VueRouter({

@@ -87,6 +87,7 @@ export default{
             userAddress:'',//用户地址
         }
     },
+    inject:['reload'],
     methods:{
           //获取用户信息
           async initUserInfo(){
@@ -95,14 +96,22 @@ export default{
             })
         },
         //退出登录
-      async  logoff(){
-           await signOut().then(res=>{
+        logoff(){
+             signOut().then(res=>{
                 if(res.message=='退出成功'){
                     this.userInfo=null
+                    this.$store.commit('clearUserInfo')
+                    this.$router.push('/profile')
+                    this.clear()
                 }
+            }).catch(error=>{
+                console.log(error)
             })
-            this.$store.commit('clearUserInfo')
-            this.$router.push('/profile')
+            
+        },
+        //重新加载父页面
+        clear(){
+            this.reload()
         }
     },
     watch:{

@@ -47,7 +47,7 @@
         </section>
         <section class="profile_msg mart">
             <ul>
-                <router-link to=""><li class="li_base">
+                <router-link to="/order"><li class="li_base">
                 <svg >
                     <use xlink:href="#icon-tickets"></use>
                 </svg>
@@ -58,7 +58,7 @@
                     </svg>
                     </div>
                 </li></router-link>
-                <router-link to=""><li class="li_base">
+                <a href="https://home.m.duiba.com.cn/#/chome/index"><li class="li_base">
                     <svg >
                     <use xlink:href="#icon-jifen"></use>
                 </svg>
@@ -68,8 +68,8 @@
                      <use xlink:href="#icon-arrow-right"></use>
                     </svg>
                     </div>
-                </li></router-link>
-                <router-link to=""><li class="li_base">
+                </li></a>
+                <router-link :to="{path:'/vipcard',query:{username:userInfo?userInfo.username:false}}"><li class="li_base">
                     <svg>
                     <use xlink:href="#icon-huiyuan"></use>
                     </svg>
@@ -109,7 +109,7 @@
             </ul>
         </section>
         <Foot userName="profile"></Foot>
-        <router-view></router-view>
+        <router-view @new="initUserInfo"></router-view>
     </div>
 </template>
 <script>
@@ -130,6 +130,11 @@ export default {
         Foot,
         Header
     },
+    provide(){
+        return{
+            reload:this.reload
+        }
+    },
     methods:{
         //获取用户信息
         initUserInfo(){
@@ -144,11 +149,16 @@ export default {
                 }
               return
             })
+        },
+        //重新加载
+        reload(){
+            this.phone='暂无绑定手机号'
+            this.userInfo=null
+            this.showimg=false
         }
     },
     created(){
         this.initUserInfo()
-      
     },
 }
 </script>
@@ -204,7 +214,7 @@ export default {
             background-color: #fff;
             div{
                 width: 33.3%;
-                border:0.01rem solid #e4e4e4;
+                border:0.01rem solid #f5f5f5;
                 a{
                     width: 100%;
                     height: 100%;
@@ -265,7 +275,7 @@ export default {
             margin-top: 0.5rem;
         }
         .bd_b{
-            border-bottom: 0.01rem solid #e4e4e4;
+            border-bottom: 0.01rem solid #f5f5f5;
         }
         .img_bd{
             border-radius: 100%;

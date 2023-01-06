@@ -97,5 +97,5 @@ export const getUserInfo=()=>{
 }
 //退出登录
 export const signOut=()=>{
-    axios.get('v2/signout')
+    return axios.get('v2/signout')
 }

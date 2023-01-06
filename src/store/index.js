@@ -27,7 +27,7 @@ export default new Vuex.Store({
     clearUserInfo(){
       this.state.userInfo=null
       localStorage.removeItem('user_id')
-    }
+    },
   },
   actions: {
   },
