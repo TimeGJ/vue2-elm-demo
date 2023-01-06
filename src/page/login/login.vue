@@ -15,7 +15,7 @@
         </div>
     </section>
     <section>
-        <input type="text" placeholder="验证码" v-model="codeNumber">
+        <input type="text" placeholder="验证码" v-model="codeNumber" maxlength="4">
         <img :src="codeImg" alt="" class="img" v-show="codeImg">
         <p @touchstart="transImg">看不清？换一张</p>
     </section>

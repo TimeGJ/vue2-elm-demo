@@ -99,3 +99,7 @@ export const getUserInfo=()=>{
 export const signOut=()=>{
     return axios.get('v2/signout')
 }
+//红包兑换
+export const changehongbao=(data)=>{
+    return axios.post('/v1/users/:user_id/hongbao/exchange',data)
+}

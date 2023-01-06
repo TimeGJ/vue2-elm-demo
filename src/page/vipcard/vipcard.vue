@@ -54,7 +54,7 @@
         <section class="vip_tool">
             <div>
                 <p>兑换会员</p>
-                <router-link to="">
+                <router-link :to="{path:'/vipcard/useCart',query:{username:username}}">
                     <div>
                     <span>使用卡号密码</span>
                     <svg>
@@ -65,7 +65,7 @@
             </div>
             <div>
                 <p>购买记录</p>
-                <router-link to="">
+                <router-link to="/vipcard/invoiceRecord">
                     <div>
                     <span>开发票</span>
                     <svg>
@@ -101,7 +101,7 @@ export default {
     }
 }
 </script>
-<style lang="less" scoped>
+<style lang="less">
 .box{
     padding-top: 3rem;
     .username_box{

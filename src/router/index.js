@@ -85,9 +85,20 @@ const routes = [
       //vip说明页面
       path:'vipDescription',
       component:()=>import ('../page/vipcard/children/vipDescription')
-    }]
+    },
+    {
+    //兑换会员页面
+    path:'useCart',
+    component:()=>import ('../page/vipcard/children/useCart')
+    },
+      //购买记录
+    {
+      path:'invoiceRecord',
+      component:()=>import ('../page/vipcard/children/invoiceRecord')
+    }
+      ]
   },
-  
+
 ]
 
 const router = new VueRouter({
