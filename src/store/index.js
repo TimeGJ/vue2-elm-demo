@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -8,7 +7,7 @@ export default new Vuex.Store({
   state: {
     position:null,//位置地点
     userInfo:null,//用户信息
-    questionDetail:null,//热门问题答案
+    serviceAnswer:[],//问题答案
   },
   getters: {
   },
@@ -30,13 +29,9 @@ export default new Vuex.Store({
       this.state.userInfo=null
       localStorage.removeItem('user_id')
     },
-    //获取问题答案
-    getquestionDetail(data){
-      axios.get('https://elm.cangdu.org/v3/profile/explain').then(res=>{
-        this.state.questionDetail=res
-        console.log(res)
-      })
-   
+    //获取答案
+    getServiceAnswer(state,data){
+        state.serviceAnswer=data
     }
   },
   actions: {

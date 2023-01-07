@@ -3,7 +3,7 @@
         <headerVue leftBack="true">
             <div slot="message">{{$route.query.title}}</div>
         </headerVue>
-        <p>{{$store.state.questionDetail[$route.query.index]}}</p>
+       <div> <p>{{this.$store.state.serviceAnswer}}</p></div>
     </div>
 </template>
 <script>
@@ -12,14 +12,12 @@ export default {
     name:'questionDetail',
     data(){
         return {
-
         }
     },
     components:{
         headerVue 
     },
     created(){
-
     }
 }
 </script>
@@ -32,5 +30,10 @@ export default {
     bottom: 0;
     background-color: #fff;
     z-index: 12;
+    overflow-y: auto;
+    p{
+        padding: 0 1rem;
+        color: #666;
+    }
 }
 </style>

@@ -95,7 +95,7 @@
                     </svg>
                     </div>
                 </li></router-link>
-                <router-link to=""><li class="li_base">
+                <router-link to="/download"><li class="li_base">
                     <svg class="color60171255">
                     <use xlink:href="#icon-eleme"></use>
                 </svg>

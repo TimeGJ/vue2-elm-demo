@@ -7,20 +7,20 @@
         </headerVue>
         <section class="service_connect">   
             <div>
-                <router-link to="">
+                <a href="https://ecs-im.ele.me/">
                     <svg>
                         <use xlink:href="#icon-kefu"></use>
                     </svg>
                     <p>在线客服</p>
-                </router-link>
+                </a>
             </div>
             <div>
-                <router-link to="">
+                <a href="tel:10105757">
                     <svg>
                         <use xlink:href="#icon-dianhua"></use>
                     </svg>
                     <p>在线客服</p>
-                </router-link>
+                </a>
             </div>
         </section>
         <section class="service_question">
@@ -48,7 +48,6 @@ export default{
     },
     data(){
         return{
-            explaindata:null,//问题答案数据
             question:[],//问题
             answer:[],//答案
         }
@@ -59,9 +58,8 @@ export default{
         //初始化数据
         initdata(){
             getexplain().then(res=>{
-                this.explaindata=Object.values(res)
                 let status=true
-                this.explaindata.forEach(item=>{
+                Object.values(res).forEach(item=>{
                     if(!status&&(/^[^#]+$/.test(item))){
                         this.question.push(item)
                         status=true
@@ -78,14 +76,15 @@ export default{
         },
         //点击跳转
         gotoquestionDetail(index,title){
+            this.$store.commit('getServiceAnswer',this.answer[index])
             this.$router.push({path:'/service/questionDetail',query:{
                 title:title,index:index
             }})
         }
     },
     created(){
+      
         this.initdata()
-        this.$store.commit('getquestionDetail')
     }
 }
 </script>

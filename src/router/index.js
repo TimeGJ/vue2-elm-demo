@@ -107,6 +107,12 @@ const routes = [
       path:'questionDetail',
       component:()=>import  ('@/page/service/children/questionDetail')
     }]
+  },
+  //下载页面
+  {
+    path:'/download',
+    name:'download',
+    component:()=>import ('@/page/download/download')
   }
 ]
 

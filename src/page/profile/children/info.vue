@@ -1,5 +1,8 @@
 <template>
     <div class="box">
+        <headerVue leftBack="true" >
+            <div slot="message">账户信息</div>
+        </headerVue>
         <section class="user_info">
         <div>
             <ul>
@@ -43,7 +46,8 @@
         <div>
             <ul>
                 <li><p>账号绑定</p></li>
-                <li>
+                <li @touchend="showTip">
+                    
                     <div>
                         <p>
                             <svg class="svg_color">
@@ -58,6 +62,7 @@
                 </li>
                 <li><p>安全设置</p></li>
                 <li>
+                    <router-link to="/forget">
                     <div>
                     <span>
                         登陆密码
@@ -69,14 +74,18 @@
                         </svg>
                     </div>
                 </div>
+            </router-link>
                 </li>
             </ul>
         </div>
     </section>
     <button class="btn" @touchend="logoff">退出登录</button>
+    <alertTipVue v-show="show" :tipText="tipText" @closeTip="closeTip"></alertTipVue>
     </div>
 </template>
 <script>
+import alertTipVue from '@/components/alertTip.vue'
+import headerVue from '@/components/head/header.vue'
 import {getUserInfo,signOut} from '../../../untils/api'
 export default{
     data(){
@@ -85,7 +94,13 @@ export default{
             imgBaseurl:'//elm.cangdu.org/img/',//图片地址
             username:null,//用户名
             userAddress:'',//用户地址
+            show:false,//显示提示框
+            tipText:null,//提示框内容
         }
+    },
+    components:{
+        alertTipVue,
+        headerVue
     },
     inject:['reload'],
     methods:{
@@ -112,9 +127,19 @@ export default{
         //重新加载父页面
         clear(){
             this.reload()
+        },
+        //click phone showTip
+        showTip(){
+            this.show=true
+            this.tipText='请在手机APP中设置'
+        },
+        //closeTip
+        closeTip(){
+            this.show=false
         }
     },
     watch:{
+        //数据传进来之后把username赋值   //可以用store传
         userInfo:{
             handler(val,old){
                 if(val){
@@ -141,6 +166,7 @@ export default{
     left: 0;
     right: 0;
     background-color:#f2f2f2;
+    z-index: 12;
     .user_info{
         position: relative;
         top: 0.5rem;
