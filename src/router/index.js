@@ -98,7 +98,16 @@ const routes = [
     }
       ]
   },
-
+  //服务中心
+  {
+    path:'/service',
+    name:'service',
+    component:()=>import ('@/page/service/service.vue'),
+    children:[{
+      path:'questionDetail',
+      component:()=>import  ('@/page/service/children/questionDetail')
+    }]
+  }
 ]
 
 const router = new VueRouter({

@@ -103,3 +103,7 @@ export const signOut=()=>{
 export const changehongbao=(data)=>{
     return axios.post('/v1/users/:user_id/hongbao/exchange',data)
 }
+//服务中心 
+export const  getexplain=()=>{
+    return axios.get('v3/profile/explain')
+}

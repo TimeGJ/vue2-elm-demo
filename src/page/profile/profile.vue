@@ -84,7 +84,7 @@
         </section>
         <section class="app_data mart">
             <ul>
-                <router-link to=""><li class="li_base">
+                <router-link to="/service"><li class="li_base">
                 <svg class="color60171255">
                     <use xlink:href="#icon-fuwu"></use>
                 </svg>
