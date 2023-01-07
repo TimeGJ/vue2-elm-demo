@@ -17,7 +17,7 @@
                 <input type="text" placeholder="请确认新密码" v-model="newPsdAgain">
             </div> 
             <section class="code_img">
-            <input type="text" placeholder="验证码" v-model="codeNumber">
+            <input type="text" placeholder="验证码" v-model="codeNumber" maxlength="4">
             <img :src="codeImg" alt="" class="img" v-show="codeImg">
             <p @touchstart="transImg">看不清？换一张</p>
              </section>  

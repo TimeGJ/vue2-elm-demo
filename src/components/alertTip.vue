@@ -1,5 +1,5 @@
 <template>
-    <div class="box">
+    <div class="alt_box">
         <div class="alertTip">
         <div class="bd">
             <div>
@@ -34,13 +34,13 @@ export default{
 }
 </script>
 <style lang="less" scoped>
-.box{
+.alt_box{
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 999;
+    z-index: 100;
     .alertTip{
         padding-top: 1rem;
         position:absolute;

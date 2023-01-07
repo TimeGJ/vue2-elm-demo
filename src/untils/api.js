@@ -91,3 +91,19 @@ export const getCategory=(latitude,longitude)=>{
        }
     })
 }
+//获取用户信息
+export const getUserInfo=()=>{
+    return axios.get('v1/user')
+}
+//退出登录
+export const signOut=()=>{
+    return axios.get('v2/signout')
+}
+//红包兑换
+export const changehongbao=(data)=>{
+    return axios.post('/v1/users/:user_id/hongbao/exchange',data)
+}
+//服务中心 
+export const  getexplain=()=>{
+    return axios.get('v3/profile/explain')
+}

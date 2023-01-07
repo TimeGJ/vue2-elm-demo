@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     position:null,//位置地点
     userInfo:null,//用户信息
+    serviceAnswer:[],//问题答案
   },
   getters: {
   },
@@ -22,6 +23,15 @@ export default new Vuex.Store({
         this.state.userInfo=localStorage.getItem('user_id')
       }
       return
+    },
+    //清空userinfo
+    clearUserInfo(){
+      this.state.userInfo=null
+      localStorage.removeItem('user_id')
+    },
+    //获取答案
+    getServiceAnswer(state,data){
+        state.serviceAnswer=data
     }
   },
   actions: {

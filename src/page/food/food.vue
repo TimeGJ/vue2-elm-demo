@@ -4,15 +4,17 @@
             <div slot="message">{{title}}</div>
         </Header>
         <div class="body_box">
+            <section class="h5">
+               <nav class="nav">
             <div class="section_box" @touchend="showCategory=!showCategory"> 
                 <span :style="{'color':showCategory?'#3190e8':'#333'}">分类</span>
                 <svg :style="{'transform': showCategory?'rotate(180deg)':'rotate(0deg)'}">
                     <use xlink:href="#icon-caret-bottom"></use>
                 </svg>
             </div>
-            <div class="section_box">
-                <span>排序</span>
-                <svg>
+            <div class="section_box" @touchend="showSort=!showSort">
+                <span :style="{'color':showSort?'#3190e8':'#333'}">排序</span>
+                <svg :style="{'transform': showSort?'rotate(180deg)':'rotate(0deg)'}">
                     <use xlink:href="#icon-caret-bottom"></use>
                 </svg>
             </div>
@@ -22,6 +24,8 @@
                     <use xlink:href="#icon-caret-bottom"></use>
                 </svg>
             </div>
+            </nav>
+            </section>
             <div class="show_box" v-show="showCategory">
                 <div class="translation_box">
                 <section>
@@ -49,7 +53,47 @@
                         </ul>
                 </section>
             </div>
+            </div>
+            <section class="sort_bgc" v-show="showSort">
+                <div class="sort_box">
+                <div >
+                    <svg>
+                        <use xlink:href="#icon-sort"></use>
+                    </svg>
+                    <span>智能排序</span>
                 </div>
+                <div>
+                    <svg>
+                        <use xlink:href="#icon-location-information"></use>
+                    </svg>
+                    <span>距离最近</span>
+                </div>
+                <div>
+                    <svg>
+                        <use xlink:href="#icon-shopping-cart-"></use>
+                    </svg>
+                    <span>销量最高</span>
+                </div>
+                <div>
+                    <svg>
+                        <use xlink:href="#icon-doller"></use>
+                    </svg>
+                    <span>起送价最低</span>
+                </div>
+                <div>
+                    <svg>
+                        <use xlink:href="#icon-timer"></use>
+                    </svg>
+                    <span>配送速度最快</span>
+                </div>
+                <div>
+                    <svg>
+                        <use xlink:href="#icon-star-off"></use>
+                    </svg>
+                    <span>评分最高</span>
+                </div>
+                 </div>
+            </section>
         </div>
         <ShopList :hashLatitude="latitude" :hashLongitude="longitude" :categoryId="categoryId" :categoryIds="categoryIds"></ShopList>
     </div>
@@ -78,6 +122,7 @@ export default{
             longitude:null,//纬度
             categoryItem:0,//当前是哪一个分类页面
             showCategory:false,//是否显示分类
+            showSort:false,//是否显示排序
         }
     },
     methods:{
@@ -108,6 +153,7 @@ export default{
         //改变分类id
         changeCategoryIds(id){
             this.categoryIds=id
+            this.showCategory=false
         }
     },
     computed:{
@@ -148,10 +194,9 @@ export default{
     }
     .show_box{
         position: fixed;
-        top: 5rem;
+        top: 4.85rem;
         bottom: 0;
         background-color:rgba(0,0,0,0.3);
-      
         width: 100%;
         z-index: 1;
         .translation_box{
@@ -219,6 +264,48 @@ export default{
             }
            }
         }
+    }
+    .sort_bgc{
+        position: fixed;
+        top: 4.8rem;
+        bottom: 0;
+        background-color:rgba(0,0,0,0.3);
+        width: 100%;
+        z-index: 1;
+        .sort_box{
+            background-color: #fff;
+            width: 100%;
+            height: auto;
+            div{
+                padding: 0.7rem 0.5rem;
+                border-bottom: 0.001rem solid #e4e4e4;
+                svg{
+                    width: 1rem;
+                    height: 1rem;
+                    vertical-align: text-bottom;
+                    fill:#3190e8;
+                }
+                span{
+                    margin-left: 0.5rem;
+                    font-size: 0.7rem;
+                    color: #666;
+                    
+                }
+            }
+        }
+    }
+    .nav{
+        position: fixed;
+        left: 0;
+        right: 0;
+        z-index: 5;
+        background-color: #fff;
+    }
+    .h5{
+        position: relative;
+        top: -0.1rem;
+        height: 2.6rem;
+       
     }
 }
 </style>

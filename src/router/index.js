@@ -64,7 +64,11 @@ const routes = [
     component:()=>import('../page/profile/profile'),
     meta:{
       keepalive:true
-    }
+    },
+    children:[{
+      path:'info',//个人信息页
+      component:()=>import ('../page/profile/children/info')
+    }]
   },
   //食物页面
   {
@@ -72,6 +76,44 @@ const routes = [
     name:'food',
     component:()=>import('../page/food/food')
   },
+  //会员中心
+  {
+    path:'/vipcard',
+    name:'vipcard',
+    component:()=>import ('../page/vipcard/vipcard'),
+    children:[{
+      //vip说明页面
+      path:'vipDescription',
+      component:()=>import ('../page/vipcard/children/vipDescription')
+    },
+    {
+    //兑换会员页面
+    path:'useCart',
+    component:()=>import ('../page/vipcard/children/useCart')
+    },
+      //购买记录
+    {
+      path:'invoiceRecord',
+      component:()=>import ('../page/vipcard/children/invoiceRecord')
+    }
+      ]
+  },
+  //服务中心
+  {
+    path:'/service',
+    name:'service',
+    component:()=>import ('@/page/service/service.vue'),
+    children:[{
+      path:'questionDetail',
+      component:()=>import  ('@/page/service/children/questionDetail')
+    }]
+  },
+  //下载页面
+  {
+    path:'/download',
+    name:'download',
+    component:()=>import ('@/page/download/download')
+  }
 ]
 
 const router = new VueRouter({
