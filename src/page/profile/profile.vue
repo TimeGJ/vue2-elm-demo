@@ -12,7 +12,7 @@
                         </svg>
                         <img :src="imgBaseurl+userInfo.avatar" alt="" v-else-if="showimg" class="img_bd">
                         <div class="user_num_box">
-                            <h4>{{userInfo?userInfo.username:'登录/注册'}}</h4>
+                            <h4>{{userInfo?username:'登录/注册'}}</h4>
                             <svg>
                                 <use xlink:href="#icon-mobile-phone"></use>
                             </svg>
@@ -27,7 +27,7 @@
         </section>
         <section class="user_data">
             <div>
-                <router-link to="">
+                <router-link to="/balance">
                 <p class="p_pad"><span class="color_1">{{userInfo?userInfo.balance:'0'}}</span><span>元</span></p>
                 <p>我的余额</p>
             </router-link>
@@ -39,7 +39,7 @@
             </router-link>
             </div>
             <div>
-                <router-link to="">
+                <router-link to="/points">
                 <p class="p_pad"><span class="color_3">{{userInfo?userInfo.point:'0'}}</span><span>分</span></p>
                 <p>我的积分</p>
             </router-link>
@@ -124,6 +124,7 @@ export default {
             phone:'暂无绑定手机号',//电话
             imgBaseurl:'//elm.cangdu.org/img/',//图片地址
             showimg:false,//是否显示图片
+            username:null,//用户名
         }
     },
     components:{
@@ -142,9 +143,11 @@ export default {
                 if(res.status!=0){
                     this.userInfo=res
                     this.showimg=true
-                    //判断有没有电话
-                    if(this.userInfo.brand_member_new!=0){
-                        this.phone=this.userInfo.brand_member_new
+                    if(this.$store.state.username){
+                        this.username=this.$store.state.username
+                    }
+                    else{
+                        this.username=res.username
                     }
                 }
               return
@@ -155,7 +158,7 @@ export default {
             this.phone='暂无绑定手机号'
             this.userInfo=null
             this.showimg=false
-        }
+        },
     },
     created(){
         this.initUserInfo()

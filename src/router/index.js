@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
+  //主页
   {
     path: '/',
     name: 'home',
@@ -67,7 +68,27 @@ const routes = [
     },
     children:[{
       path:'info',//个人信息页
-      component:()=>import ('../page/profile/children/info')
+      component:()=>import ('../page/profile/children/info'),
+      children:[{
+        //重新设置名字
+        path:'setusername',
+        component:()=> import ('../page/profile/children/children/setusername')
+      },
+      {
+        //编辑地址
+        path:'address',
+        component:()=>import ('../page/profile/children/children/address'),
+        children:[{
+          //添加地址
+          path:'add',
+          component:()=>import ('../page/profile/children/children/children/add'),
+          children:[{
+            //选择收货地址
+            path:'addDetail',
+            component:()=>import ('../page/profile/children/children/children/addDetail')
+          }]
+        }]
+      }]
     }]
   },
   //食物页面
@@ -104,6 +125,7 @@ const routes = [
     name:'service',
     component:()=>import ('@/page/service/service.vue'),
     children:[{
+      //服务说明
       path:'questionDetail',
       component:()=>import  ('@/page/service/children/questionDetail')
     }]
@@ -113,6 +135,28 @@ const routes = [
     path:'/download',
     name:'download',
     component:()=>import ('@/page/download/download')
+  },
+  //零钱页面
+  {
+    path:'/balance',
+    name:'balance',
+    component:()=> import ('@/page/balance/balance.vue'),
+    children:[{
+      //零钱说明
+      path:'detail',
+      component:()=>import ('@/page/balance/detail/detail')
+    }]
+  },
+  //积分页面
+  {
+    path:'/points',
+    name:'points',
+    component:()=>import ('@/page/points/points'),
+    children:[{
+      //积分说明
+      path:'detail',
+      component:()=>import ('@/page/points/children/detail')
+    }]
   }
 ]
 

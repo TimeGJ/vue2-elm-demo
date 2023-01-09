@@ -8,6 +8,8 @@ export default new Vuex.Store({
     position:null,//位置地点
     userInfo:null,//用户信息
     serviceAnswer:[],//问题答案
+    username:null,//用户名
+    city_id:null,//城市id
   },
   getters: {
   },
@@ -32,6 +34,14 @@ export default new Vuex.Store({
     //获取答案
     getServiceAnswer(state,data){
         state.serviceAnswer=data
+    },
+    //储存用户名
+    changeUSername(state,username){
+      state.username=username
+    },
+    //储存城市id
+    laycityid(state,id){
+      state.city_id=id
     }
   },
   actions: {
