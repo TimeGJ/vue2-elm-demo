@@ -17,7 +17,7 @@
                     </div>
                 </li>
             </router-link>
-            <router-link to="">
+            <router-link to="/profile/info/setusername">
                 <li>
                     <p>用户名</p>
                     <div>
@@ -28,7 +28,7 @@
                     </div>
                 </li>
             </router-link>
-            <router-link to="">
+            <router-link to="/profile/info/address">
                 <li>
                     <p>收货地址</p>
                     <div>
@@ -81,6 +81,7 @@
     </section>
     <button class="btn" @touchend="logoff">退出登录</button>
     <alertTipVue v-show="show" :tipText="tipText" @closeTip="closeTip"></alertTipVue>
+    <router-view></router-view>
     </div>
 </template>
 <script>
@@ -143,10 +144,15 @@ export default{
         userInfo:{
             handler(val,old){
                 if(val){
-                    this.username=val.username
-                    if(val.current_address_id!=0){
-                    this.userAddress=val.current_address_id
-                }
+                    if(this.$store.state.username){
+                        this.username=this.$store.state.username
+                    }
+                    else if(val.current_address_id!=0){
+                        this.userAddress=val.current_address_id
+                    }
+                    else{
+                            this.username=val.username
+                        }
                 return
                 }
                
