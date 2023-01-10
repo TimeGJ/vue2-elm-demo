@@ -33,7 +33,7 @@
             </router-link>
             </div>
             <div>
-                <router-link to="">
+                <router-link to="/benefit">
                 <p class="p_pad"><span class="color_2">{{userInfo?userInfo.gift_amount:'0'}}</span><span>个</span></p>
                 <p>我的优惠</p>
             </router-link>

@@ -157,6 +157,21 @@ const routes = [
       path:'detail',
       component:()=>import ('@/page/points/children/detail')
     }]
+  },
+  //红包页面
+  {
+    path:'/benefit',
+    name:'benefit',
+    component:()=> import ('../page/benefit/benefit'),
+    children:[{
+      //红包说明页面
+      path:'hbDescription',
+      component:()=> import ('@/page/benefit/children/hbDescription')
+    },{
+      //代金券说明
+      path:'coupon',
+      component:()=>import ('@/page/benefit/children/coupon')
+    }]
   }
 ]
 
