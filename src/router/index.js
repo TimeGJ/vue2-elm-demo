@@ -157,6 +157,36 @@ const routes = [
       path:'detail',
       component:()=>import ('@/page/points/children/detail')
     }]
+  },
+  //红包页面
+  {
+    path:'/benefit',
+    name:'benefit',
+    component:()=> import ('../page/benefit/benefit'),
+    children:[{
+      //红包说明页面
+      path:'hbDescription',
+      component:()=> import ('@/page/benefit/children/hbDescription')
+    },{
+      //代金券说明
+      path:'coupon',
+      component:()=>import ('@/page/benefit/children/coupon')
+    },
+    //过期红包
+    {
+      path:'hbHistory',
+      component:()=>import ('@/page/benefit/children/hbHistory')
+    },
+    //兑换红包
+    {
+      path:'exchange',
+      component:()=>import ('@/page/benefit/children/exchange')
+    },
+    //推荐页面
+    {
+      path:'commend',
+      component:()=>import ('@/page/benefit/children/commend')
+    }]
   }
 ]
 
