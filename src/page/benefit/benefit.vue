@@ -15,7 +15,7 @@
      
         <section class="hongbao_nav"  >
             <div>
-                <p>有<span>{{hongbaodata.length}}</span>个红包即将到期</p>
+                <p>有<span v-if="hongbaodata">{{hongbaodata.length}}</span>个红包即将到期</p>
             </div>
             <div>
                 <router-link to="/benefit/hbDescription">
@@ -42,25 +42,26 @@
                 </li>
             </ul>
          </section>
-         <footer><p>限品类：快餐便当、特色菜系、小吃夜宵、甜品饮品、异国料理</p></footer>
+         <footer v-if="hongbaodata"><p>限品类：快餐便当、特色菜系、小吃夜宵、甜品饮品、异国料理</p></footer>
         
-        <section class="history">
-            <router-link to="">
+        <section class="history" v-if="hongbaodata">
+            <router-link to="/benefit/hbHistory">
                 <p>查看历史红包</p>
                 <svg>
                     <use xlink:href="#icon-arrow-right"></use>
                 </svg>
             </router-link>
         </section>
+    </div>  
         <footer class="foot_router">
-            <router-link to="">
+            <router-link to="/benefit/exchange">
                 <p>兑换红包</p>
             </router-link>
-            <router-link to="">
+            <router-link to="/benefit/commend">
                 <p>推荐有奖</p>
             </router-link>
         </footer>
-        </div>
+     
         <section  v-show="!showhongbao" class="voucher_container">
         <div>
             <router-link to="/benefit/coupon">
@@ -97,7 +98,8 @@ export default {
     methods:{
         //获取红包数据
         inithb(){
-             const user_id=localStorage.getItem('user_id')
+            this.$store.commit('getUserInfo')
+             const user_id=this.$store.state.userInfo
             getgongbao(user_id,20,0).then(res=>{
                 this.hongbaodata=res
             })

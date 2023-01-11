@@ -117,3 +117,16 @@ export const getgongbao=(user_id,limit,offset)=>{
         }
     })
 }
+//过期红包
+export const getexpirdhongbao=(user_id,limit,offset)=>{
+    return axios.get('/promotion/v2/users/'+user_id+'/expired_hongbaos',{
+        params:{
+            limit,
+            offset
+        }
+    })
+}
+//兑换红包
+export const exchangehongbao=(data)=>{
+    return axios.post('v1/users/:user_id/hongbao/exchange',data)
+}

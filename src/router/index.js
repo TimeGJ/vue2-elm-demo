@@ -171,6 +171,21 @@ const routes = [
       //代金券说明
       path:'coupon',
       component:()=>import ('@/page/benefit/children/coupon')
+    },
+    //过期红包
+    {
+      path:'hbHistory',
+      component:()=>import ('@/page/benefit/children/hbHistory')
+    },
+    //兑换红包
+    {
+      path:'exchange',
+      component:()=>import ('@/page/benefit/children/exchange')
+    },
+    //推荐页面
+    {
+      path:'commend',
+      component:()=>import ('@/page/benefit/children/commend')
     }]
   }
 ]
