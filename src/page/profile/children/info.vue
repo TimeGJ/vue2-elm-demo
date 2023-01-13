@@ -6,17 +6,16 @@
         <section class="user_info">
         <div>
             <ul>
-                <router-link to="">
+                <input type="file" class="put_img" ref="img" @change="putImg"> 
                 <li>
                     <p>头像</p>
                     <div>
-                        <img :src="imgBaseurl+userInfo.avatar" alt="" v-if="userInfo" class="img_bd">
+                        <img :src="userInfoImg" alt="" v-if="userInfo" class="img_bd">
                         <svg>
                             <use xlink:href="#icon-arrow-right"></use>
                         </svg>
                     </div>
                 </li>
-            </router-link>
             <router-link to="/profile/info/setusername">
                 <li>
                     <p>用户名</p>
@@ -87,7 +86,7 @@
 <script>
 import alertTipVue from '@/components/alertTip.vue'
 import headerVue from '@/components/head/header.vue'
-import {getUserInfo,signOut} from '../../../untils/api'
+import {getUserInfo,signOut,putUserImg} from '../../../untils/api'
 export default{
     data(){
         return{
@@ -97,6 +96,7 @@ export default{
             userAddress:'',//用户地址
             show:false,//显示提示框
             tipText:null,//提示框内容
+            userInfoImg:null,//图片
         }
     },
     components:{
@@ -109,6 +109,7 @@ export default{
           async initUserInfo(){
            await getUserInfo().then(res=>{
                 this.userInfo=res
+               this.userInfoImg=this.imgBaseurl+this.userInfo.avatar
             })
         },
         //退出登录
@@ -124,6 +125,26 @@ export default{
                 console.log(error)
             })
             
+        },
+        //提交照片
+        putImg(){
+           
+           const data=new FormData()
+           data.append('file',this.$refs.img.files[0])
+           console.log(data) 
+           putUserImg(data).then(res=>{
+                if(res.status===1){
+                    this.show=true
+                    this.tipText='提交成功'
+                    this.userInfoImg=this.imgBaseurl+res.image_path
+                }
+                else {
+                    this.show=true
+                    this.tipText='提交出错'
+                }
+           }).catch(error=>{
+            console.log(error)
+           })
         },
         //重新加载父页面
         clear(){
@@ -259,6 +280,14 @@ export default{
         color: #fff;
         background: #d8584a;
         font-size: 0.8rem;
+    }
+    .put_img{
+        position: absolute;
+        width: 100%;
+        height: 4rem;
+        top: 0;
+        left: 0;
+        opacity: 0;
     }
 }
 

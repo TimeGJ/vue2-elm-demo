@@ -130,3 +130,7 @@ export const getexpirdhongbao=(user_id,limit,offset)=>{
 export const exchangehongbao=(data)=>{
     return axios.post('v1/users/:user_id/hongbao/exchange',data)
 }
+//提交照片
+export const putUserImg=(data)=>{
+   return axios.post('/v1/addimg/avatar',data)
+}
