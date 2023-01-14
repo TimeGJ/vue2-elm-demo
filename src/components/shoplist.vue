@@ -1,7 +1,7 @@
 <template>
     <div class="box">
         <ul>
-            <router-link to="" v-for="(item ) in shoppingList" :key="item.id">
+            <router-link :to="{path:'/shop',query:{id:item.id}}" v-for="(item ) in shoppingList" :key="item.id"  v-if="shoppingList">
             <li class="shopping-box">
                 <div class="left">
                     <img :src="imgBaseurl+item.image_path" alt="">
@@ -21,7 +21,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="right">
+                <div class="right" >
                     <ul>
                         <li v-for=" icon in item.supports" :key="icon.id">{{icon.icon_name}}</li>
                     </ul>

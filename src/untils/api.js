@@ -134,3 +134,7 @@ export const exchangehongbao=(data)=>{
 export const putUserImg=(data)=>{
    return axios.post('/v1/addimg/avatar',data)
 }
+//餐馆详情
+export const getShopping=(id)=>{
+    return axios.get('/shopping/restaurant/'+id)
+}

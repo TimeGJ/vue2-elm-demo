@@ -187,6 +187,12 @@ const routes = [
       path:'commend',
       component:()=>import ('@/page/benefit/children/commend')
     }]
+  },
+  //商店页面
+  {
+    path:'/shop',
+    name:'shop',
+    component:()=>import ('@/page/shop/shop')
   }
 ]
 
