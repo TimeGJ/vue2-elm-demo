@@ -138,3 +138,7 @@ export const putUserImg=(data)=>{
 export const getShopping=(id)=>{
     return axios.get('/shopping/restaurant/'+id)
 }
+//店铺食品种类
+export const getshopfoodlist=(id)=>{
+    return axios.get('/shopping/getcategory/'+id)
+}   

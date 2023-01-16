@@ -1,7 +1,7 @@
 import Axios from 'axios'
  const axios=Axios.create({
    baseURL:'/api',
-    timeout:3000,
+    timeout:5000,
 })
 //请求拦截器
 axios.interceptors.request.use(function(config){

@@ -1,14 +1,16 @@
 <template>
     <div class="shop_box" v-if="data">
-        <section class="heard_box">
+        <section class="heard_box"  >
             <section class="base_img">
             <div class="base_imgbox">
             <img :src="baseImg+data.image_path" alt="" class="base_img">
             </div>
-         </section>
+            </section>
+            <div @touchend="pageBack"> 
             <svg class="back">
                 <use xlink:href="#icon-arrow-left"></use>
             </svg>
+            </div>
             <div class="shop_title">
                 <img :src="baseImg+data.image_path" alt="">
                 <div>
@@ -24,33 +26,100 @@
             </div>
         </section>
         <nav class="nav_to">
-                <div><span>商品</span></div>
-                <div><span>评价</span></div>
+                <div  @touchend="changeShowbd"><span :class="{bd_b:changeShow}">商品</span></div>
+                <div  @touchend="changeShowbd"><span :class="{bd_b:!changeShow}">评价</span></div>
             </nav>
-        <section></section>
-        <section></section>
+        <section v-show="changeShow" class="food_left">
+                <div>
+                    <section class="food_list">
+                        <ul>
+                            <li v-for="item,index in foodList" :key="item.id">
+                                <span>{{item.name}}</span>
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <section>
+                            <div>
+                                
+                            </div>
+                            <ul>
+                                <li v-for="item in food[foodindex]">
+                                    <div>
+                                        <img src="" alt="">
+                                    </div>
+                                    <div>
+                                        <div><span></span><span></span></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div><span></span> <div><svg><use></use></svg></div></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </section>
+                    </section>
+                </div>
+                <footer class="footer_box">
+
+                </footer>
+        </section>
+        <section  v-show="!changeShow"></section>
     </div>
 </template>
 <script>
-import {getShopping} from '@/untils/api'
+import {getShopping,getshopfoodlist} from '@/untils/api'
 export default{
     name:'Shop',
     data(){
         return{
             data:null,//商铺数据
             baseImg:'//elm.cangdu.org/img/',//图片基础地址
+            changeShow:true,//商品评价切换的显示
+            foodList:[],//食品列表
+            food:[],//食物
+            foodindex:0,//食物对应索引
         }
     },
     methods:{
+        //初始化数据
         initdata(){
             getShopping(this.$route.query.id).then(res=>{
                 this.data=res
                 console.log(res)
             })
-        }
+        },
+        //商品评价切换的显示
+        changeShowbd(){
+            this.changeShow=!this.changeShow
+        },
+        //返回
+        pageBack(){
+            this.$router.go(-1)
+        },
+        //获取食物列表
+        initFoodList(){
+            getshopfoodlist(this.$route.query.id).then(res=>{
+                //去掉没有食物的空列表
+                res.category_list.forEach(item=>{
+                    if(item.foods.length!=0){
+                        this.foodList.push(item)
+                        this.food.push(item.foods)
+                    }
+                    else{
+                        return
+                    }
+                })
+            }).catch(error=>{
+                console.log(error)
+            })
+        },
+        //获取对应的食物列表
+
     },
     created(){
         this.initdata()
+        this.initFoodList()
     }
 
 }
@@ -79,6 +148,9 @@ export default{
             top: 0.5rem;
             width: 1rem;
             height: 1rem;
+            z-index: 9;
+            fill: #fff;
+           
         }
         .shop_title{
             position: relative;
@@ -130,11 +202,42 @@ export default{
                 text-align: center;
                 margin: .7rem;
                 width: 50%;
+                .bd_b{
+                    border-bottom: 2px solid #3190e8;
+                    pointer-events: none;
+                }
                span{
+                padding-bottom: 0.2rem;
                 font-size: 0.8rem;
                 color: #666;
                }
             }
         }
+        .food_left{
+            width: 5rem;
+            div{
+          .food_list{
+                ul{
+                    height: 26rem;
+                    overflow: hidden;
+                    .choose_bd{
+                        border-left: 2px solid #3190e8;
+                        background-color: #fff;
+                    }
+                   li{
+                    padding: 0.5rem ;
+                    width: 100%;
+                    height: 3rem;
+                    border-bottom: 1px solid #ededed;
+                    span{
+                        font-size: 0.8rem;
+                        color: #666;
+                    }
+                   }
+
+                }
+            }
+        }
+     }
 }
 </style>
