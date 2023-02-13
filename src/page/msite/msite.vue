@@ -10,7 +10,7 @@
         <router-link :to="{path:'/login'}" slot="login" v-if="!this.$store.state.userInfo"><span>登录|注册</span></router-link>
        </Header>
        <nav>
-       <div class="bannerbox">
+       <div class="bannerbox" v-if="foodList">
         <div class="banner" ref="swiperBox" @touchmove="swiper" @touchstart="initX" @touchend="swiperEnd">
             <div v-for="(arr,index) in foodList " :key="index" class="swiperList" >
             <ul>
@@ -51,7 +51,7 @@ export default {
     data(){
         return {
             address:'',//当前地址
-            foodList:[],//食品列表
+            foodList:null,//食品列表
             imgBaseurl:'https://fuss10.elemecdn.com',//图片地址
             m:null,//触摸的初始位置
             w:null,//移动的范围

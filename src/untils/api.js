@@ -130,3 +130,15 @@ export const getexpirdhongbao=(user_id,limit,offset)=>{
 export const exchangehongbao=(data)=>{
     return axios.post('v1/users/:user_id/hongbao/exchange',data)
 }
+//提交照片
+export const putUserImg=(data)=>{
+   return axios.post('/v1/addimg/avatar',data)
+}
+//餐馆详情
+export const getShopping=(id)=>{
+    return axios.get('/shopping/restaurant/'+id)
+}
+//店铺食品种类
+export const getshopfoodlist=(id)=>{
+    return axios.get('/shopping/getcategory/'+id)
+}   
