@@ -1,0 +1,167 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3820450 */
+  src: url('iconfont.woff2?t=1676300013905') format('woff2'),
+       url('iconfont.woff?t=1676300013905') format('woff'),
+       url('iconfont.ttf?t=1676300013905') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-add:before {
+  content: "\e742";
+}
+
+.icon-yiguoqi:before {
+  content: "\e65c";
+}
+
+.icon-dianhua:before {
+  content: "\e61f";
+}
+
+.icon-kefu:before {
+  content: "\e88f";
+}
+
+.icon-jifen:before {
+  content: "\e600";
+}
+
+.icon-fuwu:before {
+  content: "\eb36";
+}
+
+.icon-huiyuan:before {
+  content: "\e8b1";
+}
+
+.icon-mobile-phone:before {
+  content: "\e65f";
+}
+
+.icon-user-filling:before {
+  content: "\e68b";
+}
+
+.icon-sort:before {
+  content: "\e66c";
+}
+
+.icon-shopping-cart-:before {
+  content: "\e676";
+}
+
+.icon-doller:before {
+  content: "\e8fc";
+}
+
+.icon-timer:before {
+  content: "\e689";
+}
+
+.icon-caret-bottom:before {
+  content: "\e63a";
+}
+
+.icon-close:before {
+  content: "\e643";
+}
+
+.icon-star-on:before {
+  content: "\e66b";
+}
+
+.icon-star-off:before {
+  content: "\e670";
+}
+
+.icon-s-shop:before {
+  content: "\e66a";
+}
+
+.icon-tickets:before {
+  content: "\e66d";
+}
+
+.icon-discover:before {
+  content: "\e64f";
+}
+
+.icon-eleme:before {
+  content: "\e652";
+}
+
+.icon-search:before {
+  content: "\e665";
+}
+
+.icon-add-location:before {
+  content: "\e634";
+}
+
+.icon-back:before {
+  content: "\e635";
+}
+
+.icon-arrow-left:before {
+  content: "\e636";
+}
+
+.icon-arrow-right:before {
+  content: "\e637";
+}
+
+.icon-arrow-up:before {
+  content: "\e638";
+}
+
+.icon-arrow-down:before {
+  content: "\e639";
+}
+
+.icon-circle-plus-outline:before {
+  content: "\e640";
+}
+
+.icon-circle-plus:before {
+  content: "\e641";
+}
+
+.icon-cherry:before {
+  content: "\e642";
+}
+
+.icon-coffee:before {
+  content: "\e653";
+}
+
+.icon-football:before {
+  content: "\e654";
+}
+
+.icon-fork-spoon:before {
+  content: "\e655";
+}
+
+.icon-food:before {
+  content: "\e656";
+}
+
+.icon-ice-cream-round:before {
+  content: "\e658";
+}
+
+.icon-location-information:before {
+  content: "\e65b";
+}
+
+.icon-user:before {
+  content: "\e66f";
+}
+
