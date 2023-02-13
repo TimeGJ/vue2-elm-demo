@@ -1,6 +1,6 @@
 import Axios from 'axios'
  const axios=Axios.create({
-   baseURL:'/api',
+   baseURL:'https://elm.cangdu.org/',
     timeout:5000,
 })
 //请求拦截器
@@ -13,7 +13,7 @@ axios.interceptors.request.use(function(config){
 //请求响应
 axios.interceptors.response.use(function(response){
     if(response.status===200){
-        console.log(response)
+        // console.log(response)
         return response.data
     }
     else{
