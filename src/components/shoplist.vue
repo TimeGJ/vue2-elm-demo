@@ -152,15 +152,15 @@ export default{
                      }
                 h4{
                     display: inline-block;
-                    padding-left: 0.2rem;
+                    padding-left: 0.5rem;
                     font-size: 0.7rem;
                     }
                 .sell-num{
-                    font-size: 0.1rem;
+                    font-size: 0.5rem;
                     color: #666;
                 }
                 .delivery{
-                    font-size: 0.1rem;
+                    font-size: 0.5rem;
                     color: #666;
                 }
                 .star_box{
@@ -169,7 +169,7 @@ export default{
                     }
                     
                     .star_tip{
-                        font-size: 0.2rem;
+                        font-size: 0.4rem;
                         color: #ff6000;
                     }
                 }
@@ -185,7 +185,7 @@ export default{
                     display: inline-block;
                     border: 0.025rem solid #f1f1f1;
                     color: #999;
-                    font-size: 0.05rem;
+                    font-size: 0.4rem;
                 }
             }
             .right_delivery{
@@ -195,23 +195,23 @@ export default{
                 span:nth-child(1){
                     background-color: #3190e8;
                     border: 0.025rem solid #3190e8;
-                    font-size: 0.2rem;
+                    font-size: 0.4rem;
                     color: white;
                 }
                 span:nth-last-child(1){
                     border: 0.025rem solid #3190e8;
                     color: #3190e8;
-                    font-size: 0.2rem;
+                    font-size: 0.4rem;
                 }
             }
             .distance-time{
                 span:nth-child(1){
-                    font-size: 0.2rem;
+                    font-size: 0.4rem;
                     color: #999;
                 }
                 span:nth-last-child(1){
                     color: #3190e8;
-                    font-size: 0.2rem;
+                    font-size: 0.4rem;
                 }
             }
        }
